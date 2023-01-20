@@ -15,10 +15,8 @@ const Header = ({
             {isValidadPresupuesto ?
                 (
                     <p>Control Presupuesto</p>
-
                 ) :
                 (
-
                     <NuevoPresupuesto
                         presupuesto={presupuesto}
                         setPresupuesto={setPresupuesto}
