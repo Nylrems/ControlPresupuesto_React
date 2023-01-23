@@ -16,7 +16,11 @@ function App() {
 
     setTimeout(() => {
       setAnimarModal(true);
-    }, 500)
+    }, 300)
+  }
+
+  const guardarGastos = (gasto) => {
+    console.log(gasto);
   }
 
   return (
@@ -44,6 +48,7 @@ function App() {
           setModal={setModal}
           animarModal={animarModal}
           setAnimarModal={setAnimarModal}
+          guardarGastos={guardarGastos}
         />
       }
     </>
