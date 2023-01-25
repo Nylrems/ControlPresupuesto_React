@@ -71,7 +71,7 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGastos }) => {
                         type='number'
                         placeholder='Añade la cantidad'
                         value={cantidad}
-                        onChange={e => setCantidad(e.target.value)}
+                        onChange={e => setCantidad(Number(e.target.value))}
                     />
                 </div>
                 <div className='campo'>
