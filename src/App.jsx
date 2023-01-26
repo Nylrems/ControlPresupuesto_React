@@ -50,6 +50,7 @@ function App() {
       )
       gasto.fecha = Date.now()
       setGastos(gastosActualizado);
+      setGastoEditar({})
 
     } else {
       //Nuevo gasto
@@ -110,6 +111,7 @@ function App() {
           setAnimarModal={setAnimarModal}
           guardarGastos={guardarGastos}
           gastoEditar={gastoEditar}
+          setGastoEditar={setGastoEditar}
         />
       }
     </>
