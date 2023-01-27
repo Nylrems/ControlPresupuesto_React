@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Filtros from './components/Filtros';
 import Header from './components/Header'
 import ListadoGastos from './components/ListadoGastos';
 import Modal from './components/Modal';
@@ -7,41 +8,49 @@ import IconoNuevoGasto from './img/nuevo-gasto.svg'
 
 function App() {
 
-  const [gastos, setGastos] = useState([]);
+  const [gastos, setGastos] = useState(
+    localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')) : []
+  );
 
   const [presupuesto, setPresupuesto] = useState(
     Number(localStorage.getItem('presupuesto')) ?? 0
   );
+
   const [isValidadPresupuesto, setIsValidPresupuesto] = useState(false)
 
   const [modal, setModal] = useState(false);
   const [animarModal, setAnimarModal] = useState(false);
 
   const [gastoEditar, setGastoEditar] = useState({})
+  const [filtro, setFiltro] = useState('');
+    useEffect(() => {
+      if (Object.keys(gastoEditar).length > 0) {
+        setModal(true);
 
-  useEffect(() => {
-    if (Object.keys(gastoEditar).length > 0) {
-      setModal(true);
+        setTimeout(() => {
+          setAnimarModal(true);
+        }, 300);
+      }
 
-      setTimeout(() => {
-        setAnimarModal(true);
-      }, 300);
-    }
-
-    //console.log('Componente listo');
-  }, [gastoEditar])
+      //console.log('Componente listo');
+    }, [gastoEditar])
 
   useEffect(() => {
     localStorage.setItem('presupuesto', presupuesto ?? 0)
   }, [presupuesto]);
 
   useEffect(() => {
+    localStorage.setItem('gastos', JSON.stringify(gastos) ?? 0)
+  }, [gastos])
+
+  //Este useEffect es para pasarte a la ventana de gastos si hay un presupuesto válido en el localStorage
+  useEffect(() => {
     const presupuestoLS = Number(localStorage.getItem('presupuesto')) ?? 0;
 
     if (presupuestoLS > 0) {
-      setIsValidPresupuesto(true)
+      setIsValidPresupuesto(true);
     }
-  })
+  });
 
   const handleNuevoGasto = () => {
     setModal(true);
@@ -101,6 +110,9 @@ function App() {
       {isValidadPresupuesto && (
         <>
           <main>
+            <Filtros
+
+            />
             <ListadoGastos
               setGastoEditar={setGastoEditar}
               gastos={gastos}
